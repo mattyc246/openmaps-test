@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import styled from 'styled-components/macro';
+
+import 'leaflet/dist/leaflet.css';
+
+import OSMap from './components/Map';
+import TestingTools from './components/TestingTools';
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+`;
+const FlexWrapper = styled.div`
+  display: flex;
+`;
+const Column = styled.div`
+  flex: 1;
+  min-height: 500px;
+  margin: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+`;
 
 function App() {
+  const [polyLine, setPolyLine] = useState(null);
+  const [gogetterLocation, setGogetterLocation] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <FlexWrapper>
+        <Column>
+          <TestingTools
+            setPolyLine={setPolyLine}
+            setGogetterLocation={setGogetterLocation}
+          />
+        </Column>
+        <Column>
+          <OSMap polyLine={polyLine} gogetterLocation={gogetterLocation} />
+        </Column>
+      </FlexWrapper>
+    </Container>
   );
 }
 
